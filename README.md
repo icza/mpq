@@ -1,10 +1,13 @@
 # mpq
 
+[![GoDoc](https://godoc.org/github.com/icza/mpq?status.svg)](https://godoc.org/github.com/icza/mpq)
+
 Package `mpq` is a decoder/parser of Blizzard's MPQ archive file format.
 
 This is not a full implementation, primarily intended to parse StarCraft II replay files (`*.SC2Replay`).
 
 Information sources:
+
 - The_MoPaQ_Archive_Format: http://wiki.devklog.net/index.php?title=The_MoPaQ_Archive_Format
 - MPQ on wikipedia: http://en.wikipedia.org/wiki/MPQ
 - Zezula MPQ description: http://www.zezula.net/mpq.html
