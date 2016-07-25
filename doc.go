@@ -7,10 +7,15 @@ This is not a full implementation, primarily intended to parse StarCraft II repl
 Information sources:
 
 - The_MoPaQ_Archive_Format: http://wiki.devklog.net/index.php?title=The_MoPaQ_Archive_Format
+
 - MPQ on wikipedia: http://en.wikipedia.org/wiki/MPQ
+
 - Zezula MPQ description: http://www.zezula.net/mpq.html
+
 - Stormlib: https://github.com/ladislav-zezula/StormLib
+
 - Libmpq project: https://github.com/ge0rg/libmpq (old: https://libmpq.org/)
+
 - MPQ parser of the Scelight project: https://github.com/icza/scelight/tree/master/src-app-libs/hu/belicza/andras/mpq
 
 Format of the "(attributes)" meta attributes file:
