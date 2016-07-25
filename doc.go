@@ -28,7 +28,7 @@ Getting a named file from the archive:
 
 If you already have the MPQ data in memory:
 
-	mpqdata := []byte{/* ... */} // MPQ data in memory
+	mpqdata := []byte{} // MPQ data in memory
 	m, err := mpq.New(bytes.NewReader(mpqdata)))
 
 
