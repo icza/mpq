@@ -31,7 +31,7 @@ Getting a named file from the archive:
 
 If you already have the MPQ data in memory:
 
-	mpqdata := []byte{/* ... */} // MPQ data in memory
+	mpqdata := []byte{} // MPQ data in memory
 	m, err := mpq.New(bytes.NewReader(mpqdata)))
 
 ## Information sources
@@ -45,4 +45,4 @@ If you already have the MPQ data in memory:
 
 ## License
 
-Open-sourced under the [Apache License 2.0](https://github.com/icza/scelight/blob/master/LICENSE).
+Open-sourced under the [Apache License 2.0](https://github.com/icza/mpq/blob/master/LICENSE).
