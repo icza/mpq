@@ -100,6 +100,14 @@ func hashString(s string, hashType uint32) uint32 {
 	return seed1
 }
 
+// FileNameHash returns different hashes of the file name,
+// exactly the ones that are needed by MPQ.FileByHash().
+func FileNameHash(name string) (h1, h2, h3 uint32) {
+	return hashString(name, hashTypeTableOffset),
+		hashString(name, hashTypeNameA),
+		hashString(name, hashTypeNameB)
+}
+
 // decompressMulti decompresses a block which was compressed using the multi compression method (beFlagCompressedMulti).
 func decompressMulti(dst, src []byte) error {
 	// Check if block is really compressed, some blocks have set the compression flag, but are not compressed.

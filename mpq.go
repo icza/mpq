@@ -448,13 +448,19 @@ func (m *MPQ) FilesCount() uint32 {
 // nil slice and error returned if the file cannot be found.
 // ErrInvalidArchive is returned if the file exists but the storing method of the file
 // is not supported/implemented or some error occurs.
+//
+// Implementation note: this method returns:
+//
+//     MPQ.FileByHash(FileNameHash(name))
+//
+// If you need to call this frequently, it's profitable to store the hashes returned by
+// FileNameHash(), and call MPQ.FileByHash() directly passing the stored hashes.
 func (m *MPQ) FileByName(name string) ([]byte, error) {
-	return m.FileByHash(hashString(name, hashTypeTableOffset),
-		hashString(name, hashTypeNameA),
-		hashString(name, hashTypeNameB))
+	return m.FileByHash(FileNameHash(name))
 }
 
 // FileByHash returns the content of a file specified by hashes of its name from the archive.
+// The required hashes of a name can be acquired using the FileNameHash() function.
 //
 // nil slice and nil error is returned if the file cannot be found.
 // ErrInvalidArchive is returned if the file exists but the storing method of the file
