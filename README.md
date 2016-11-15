@@ -1,6 +1,6 @@
 # mpq
 
-[![GoDoc](https://godoc.org/github.com/icza/mpq?status.svg)](https://godoc.org/github.com/icza/mpq)
+[![GoDoc](https://godoc.org/github.com/icza/mpq?status.svg)](https://godoc.org/github.com/icza/mpq) [![Build Status](https://travis-ci.org/icza/mpq.svg?branch=master)](https://travis-ci.org/icza/mpq)
 
 Package `mpq` is a decoder/parser of Blizzard's MPQ archive file format.
 
