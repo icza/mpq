@@ -69,6 +69,9 @@ func testFile(t *testing.T, name string) {
 			}
 
 			m, err = New(bytes.NewReader(content))
+			if err != nil {
+				t.Errorf("Failed to read from memory buffer, error: %v", err)
+			}
 		}
 
 		if err != nil {

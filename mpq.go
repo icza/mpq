@@ -14,6 +14,7 @@ import (
 )
 
 var (
+	// ErrInvalidArchive indicates an invalid MPQ archive
 	ErrInvalidArchive = errors.New("Invalid MPQ Archive!")
 )
 
@@ -211,7 +212,7 @@ type blockEntry struct {
 	flags uint32
 }
 
-// Describes an MPQ archive and provides access to its content.
+// MPQ describes an MPQ archive and provides access to its content.
 type MPQ struct {
 	file  *os.File      // Optional source file
 	input io.ReadSeeker // Input data of the MPQ content
