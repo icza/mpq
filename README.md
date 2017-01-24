@@ -1,6 +1,9 @@
 # mpq
 
-[![GoDoc](https://godoc.org/github.com/icza/mpq?status.svg)](https://godoc.org/github.com/icza/mpq) [![Build Status](https://travis-ci.org/icza/mpq.svg?branch=master)](https://travis-ci.org/icza/mpq)
+[![Build Status](https://travis-ci.org/icza/mpq.svg?branch=master)](https://travis-ci.org/icza/mpq)
+[![GoDoc](https://godoc.org/github.com/icza/mpq?status.svg)](https://godoc.org/github.com/icza/mpq)
+[![Go Report Card](https://goreportcard.com/badge/github.com/icza/mpq)](https://goreportcard.com/report/github.com/icza/mpq)
+[![codecov](https://codecov.io/gh/icza/mpq/branch/master/graph/badge.svg)](https://codecov.io/gh/icza/mpq)
 
 Package `mpq` is a decoder/parser of Blizzard's MPQ archive file format.
 
