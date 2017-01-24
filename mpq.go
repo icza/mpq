@@ -278,12 +278,20 @@ func (m *MPQ) diveIn() (*MPQ, error) {
 		return nil, err
 	}
 
+	binread := func(r io.Reader, order binary.ByteOrder, data interface{}) error {
+		if err != nil {
+			return err // No-op if we already have an error
+		}
+		err = binary.Read(r, order, data)
+		return err
+	}
+
 	// Optionally the MPQ starts with a User Data section
 	var headerOffset int64
 	if magic == userDataMagic {
 		u := userData{}
-		err = binary.Read(in, binary.LittleEndian, &u.size)
-		err = binary.Read(in, binary.LittleEndian, &u.headerOffset)
+		binread(in, binary.LittleEndian, &u.size)
+		binread(in, binary.LittleEndian, &u.headerOffset)
 		if err == nil {
 			u.data = make([]byte, u.size)
 			_, err = io.ReadFull(in, u.data)
@@ -310,23 +318,23 @@ func (m *MPQ) diveIn() (*MPQ, error) {
 	}
 	h := header{}
 
-	err = binary.Read(in, binary.LittleEndian, &h.size)
-	err = binary.Read(in, binary.LittleEndian, &h.archiveSize)
-	err = binary.Read(in, binary.LittleEndian, &h.formatVersion)
-	err = binary.Read(in, binary.LittleEndian, &h.sectorSizeShift)
-	err = binary.Read(in, binary.LittleEndian, &h.hashTableOffset)
-	err = binary.Read(in, binary.LittleEndian, &h.blockTableOffset)
-	err = binary.Read(in, binary.LittleEndian, &h.hashTableEntries)
-	err = binary.Read(in, binary.LittleEndian, &h.blockTableEntries)
+	binread(in, binary.LittleEndian, &h.size)
+	binread(in, binary.LittleEndian, &h.archiveSize)
+	binread(in, binary.LittleEndian, &h.formatVersion)
+	binread(in, binary.LittleEndian, &h.sectorSizeShift)
+	binread(in, binary.LittleEndian, &h.hashTableOffset)
+	binread(in, binary.LittleEndian, &h.blockTableOffset)
+	binread(in, binary.LittleEndian, &h.hashTableEntries)
+	binread(in, binary.LittleEndian, &h.blockTableEntries)
 
 	if err != nil {
 		return nil, ErrInvalidArchive
 	}
 
 	if h.formatVersion > 0 {
-		err = binary.Read(in, binary.LittleEndian, &h.extendedBlockTableOffset)
-		err = binary.Read(in, binary.LittleEndian, &h.hashTableOffsetHigh)
-		err = binary.Read(in, binary.LittleEndian, &h.blockTableOffsetHigh)
+		binread(in, binary.LittleEndian, &h.extendedBlockTableOffset)
+		binread(in, binary.LittleEndian, &h.hashTableOffsetHigh)
+		binread(in, binary.LittleEndian, &h.blockTableOffsetHigh)
 	}
 
 	if err != nil {
@@ -503,7 +511,7 @@ func (m *MPQ) FileByHash(h1, h2, h3 uint32) ([]byte, error) {
 		// The block containing the file
 		blockEntry := m.blockTable[blockEntryIndex]
 
-		var blockOffsetBase int64 = int64(blockEntry.blockOffset)
+		var blockOffsetBase = int64(blockEntry.blockOffset)
 		if m.extBlockEntryHighOffsets != nil {
 			blockOffsetBase += int64(m.extBlockEntryHighOffsets[blockEntryIndex]) << 32
 		}

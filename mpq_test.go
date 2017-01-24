@@ -63,7 +63,8 @@ func testFile(t *testing.T, name string) {
 		if i == 0 {
 			m, err = NewFromFile(name)
 		} else {
-			content, err := ioutil.ReadFile(name)
+			var content []byte
+			content, err = ioutil.ReadFile(name)
 			if err != nil {
 				t.Errorf("Failed to read input file: %s, error: %v", name, err)
 			}

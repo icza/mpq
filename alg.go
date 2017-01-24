@@ -63,8 +63,8 @@ func init() {
 // decrypt decrypts the given encrypted data with the specified key.
 // The same byte slice is used for the result, so the decrypted data will be written back into the input data slice.
 func decrypt(data []byte, key uint32) {
-	var seed1 uint32 = key
-	var seed2 uint32 = 0xeeeeeeee
+	var seed1 = key
+	var seed2 = uint32(0xeeeeeeee)
 	var ch uint32
 
 	for i, size := 0, len(data); i < size; i += 4 {
