@@ -431,7 +431,7 @@ func (m *MPQ) Input() io.ReadSeeker {
 	return m.input
 }
 
-// UserData returns the optional data that preceeds the MPQ header.
+// UserData returns the optional data that precedes the MPQ header.
 func (m *MPQ) UserData() []byte {
 	if m.userData == nil {
 		return nil
