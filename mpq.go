@@ -454,7 +454,7 @@ func (m *MPQ) FilesCount() uint32 {
 
 // FileByName returns the content of a file specified by its name from the archive.
 //
-// nil slice and error returned if the file cannot be found.
+// nil slice and nil error is returned if the file cannot be found.
 // ErrInvalidArchive is returned if the file exists but the storing method of the file
 // is not supported/implemented or some error occurs.
 //

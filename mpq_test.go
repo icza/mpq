@@ -2,6 +2,7 @@ package mpq
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
 	"path"
 	"strings"
@@ -55,6 +56,7 @@ func testFolder(t *testing.T, folder string) {
 }
 
 func testFile(t *testing.T, name string) {
+	fmt.Println("Testing file", name)
 	// 2 rounds: from file and from memory
 	for i := 0; i < 2; i++ {
 		var m *MPQ
@@ -104,8 +106,10 @@ func testMpq(t *testing.T, name string, m *MPQ) {
 		"(listfile)",
 	}
 	for _, file := range files {
-		if _, err := m.FileByName(file); err != nil {
+		if data, err := m.FileByName(file); err != nil {
 			t.Errorf("Error getting file '%s' from archive: %s, error: %v", name, file, err)
+		} else if data == nil {
+			fmt.Println("\tFile not present in archive:", file)
 		}
 	}
 }
