@@ -15,7 +15,7 @@ import (
 
 var (
 	// ErrInvalidArchive indicates an invalid MPQ archive
-	ErrInvalidArchive = errors.New("Invalid MPQ Archive!")
+	ErrInvalidArchive = errors.New("Invalid MPQ Archive")
 )
 
 // blockEntry.flag bitmask constants.
