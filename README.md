@@ -46,6 +46,11 @@ If you already have the MPQ data in memory:
 - Libmpq project: https://github.com/ge0rg/libmpq (old: https://libmpq.org/)
 - MPQ parser of the Scelight project: https://github.com/icza/scelight/tree/master/src-app-libs/hu/belicza/andras/mpq
 
+## Example projects using this
+
+- https://github.com/icza/s2prot
+- https://github.com/icza/repmastered
+
 ## License
 
 Open-sourced under the [Apache License 2.0](https://github.com/icza/mpq/blob/master/LICENSE).
