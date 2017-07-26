@@ -278,11 +278,11 @@ func (m *MPQ) diveIn() (*MPQ, error) {
 		return nil, err
 	}
 
-	binread := func(r io.Reader, order binary.ByteOrder, data interface{}) error {
+	read := func(data interface{}) error {
 		if err != nil {
 			return err // No-op if we already have an error
 		}
-		err = binary.Read(r, order, data)
+		err = binary.Read(in, binary.LittleEndian, data)
 		return err
 	}
 
@@ -290,8 +290,8 @@ func (m *MPQ) diveIn() (*MPQ, error) {
 	var headerOffset int64
 	if magic == userDataMagic {
 		u := userData{}
-		binread(in, binary.LittleEndian, &u.size)
-		binread(in, binary.LittleEndian, &u.headerOffset)
+		read(&u.size)
+		read(&u.headerOffset)
 		if err == nil {
 			u.data = make([]byte, u.size)
 			_, err = io.ReadFull(in, u.data)
@@ -318,23 +318,23 @@ func (m *MPQ) diveIn() (*MPQ, error) {
 	}
 	h := header{}
 
-	binread(in, binary.LittleEndian, &h.size)
-	binread(in, binary.LittleEndian, &h.archiveSize)
-	binread(in, binary.LittleEndian, &h.formatVersion)
-	binread(in, binary.LittleEndian, &h.sectorSizeShift)
-	binread(in, binary.LittleEndian, &h.hashTableOffset)
-	binread(in, binary.LittleEndian, &h.blockTableOffset)
-	binread(in, binary.LittleEndian, &h.hashTableEntries)
-	binread(in, binary.LittleEndian, &h.blockTableEntries)
+	read(&h.size)
+	read(&h.archiveSize)
+	read(&h.formatVersion)
+	read(&h.sectorSizeShift)
+	read(&h.hashTableOffset)
+	read(&h.blockTableOffset)
+	read(&h.hashTableEntries)
+	read(&h.blockTableEntries)
 
 	if err != nil {
 		return nil, ErrInvalidArchive
 	}
 
 	if h.formatVersion > 0 {
-		binread(in, binary.LittleEndian, &h.extendedBlockTableOffset)
-		binread(in, binary.LittleEndian, &h.hashTableOffsetHigh)
-		binread(in, binary.LittleEndian, &h.blockTableOffsetHigh)
+		read(&h.extendedBlockTableOffset)
+		read(&h.hashTableOffsetHigh)
+		read(&h.blockTableOffsetHigh)
 	}
 
 	if err != nil {
