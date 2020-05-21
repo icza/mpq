@@ -49,7 +49,6 @@ If you already have the MPQ data in memory:
 ## Example projects using this
 
 - https://github.com/icza/s2prot
-- https://github.com/icza/repmastered
 
 ## License
 
